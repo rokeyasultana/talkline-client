@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+        .then(() => { })
+        .catch(err => console.log(err));
+}
+
     return (
         <div>
             <div className="navbar bg-gradient-to-r from-cyan-500 to-blue-500 text-white">
@@ -13,7 +21,14 @@ const Navbar = () => {
       <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-box w-52 ">
         <li><Link to='/'>Homepage</Link></li>
         <li><Link to='/media'>Media</Link></li>
-      <li> <Link to='/about'>About</Link></li>
+        <li><Link to='/about'>About</Link></li>
+        
+        {user?.uid ?
+            <>
+         
+        <button onClick={handleLogOut}>Sign out</button>
+            </>
+            :<li><Link to='/signin'>Sign in</Link></li>}
       </ul>
     </div>
   </div>
