@@ -1,21 +1,25 @@
 import React, { useContext, useState } from 'react';
 import './MediaCard.css'
+
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
-import { Link, useNavigate } from 'react-router-dom';
 
 
-const MediaCard = ({post}) => {
+const MediaCard = ({post,refetch}) => {
 
-    const [like,setLike] = useState(post.like)
+  const{_id,message,displayName,photo,counter,comment} = post;
 
-    const [isLiked,setIsLiked] = useState(false);
+  const {user} = useContext(AuthContext)
+  const [count, setCount] = useState(counter + 1 || 1);
 
-const likeHandler = () => {
-    setLike(isLiked ? like-1 : like+1)
-    setIsLiked(!isLiked)
-
+  const handleUpdatedLove = () => {
+    setCount(count + 1);
+    const counting = {
+      count,
+    }
   }
-    const{_id,message,displayName,photo} = post;
+
+   
     
     const navigate = useNavigate();
 
@@ -36,9 +40,9 @@ navigate(`/post/${id}`);
    <div>
    <div className="postBottom">
           <div  className="postBottomLeft">
-        <img src="https://raw.githubusercontent.com/safak/youtube/react-social-ui/public/assets/like.png" alt="" className='likeIcon' onClick={likeHandler}/>
-        <img src="https://raw.githubusercontent.com/safak/youtube/react-social-ui/public/assets/heart.png" alt="" className='likeIcon' onClick={likeHandler} />
-            <span className="postLikeCounter">{like}</span>
+        <img src="https://raw.githubusercontent.com/safak/youtube/react-social-ui/public/assets/like.png" alt="" className='likeIcon' />
+        <img src="https://raw.githubusercontent.com/safak/youtube/react-social-ui/public/assets/heart.png" alt="" className='likeIcon'  />
+            <span className="postLikeCounter"></span>
           </div>
          
   </div>
