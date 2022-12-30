@@ -26,17 +26,18 @@ const Signup = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                toast('User Created Successfully.')
+                toast.success('User Created Successfully.')
                 const userInfo = {
                     displayEmail:data.email,
                     displayName: data.name,
+                    displayAddress: data.address,
+                    displayUniversity: data.university,
                     
-
                 }
                 console.log(userInfo );
                 updateUser(userInfo)
                     .then(() => { 
-                 
+                        saveUser(data.name,data.email,data.address, data.university)
                     })
                     .catch(err => console.log(err));
             })
@@ -46,21 +47,34 @@ const Signup = () => {
        
             });
     }
-
+    const saveUser = (name,email,address,university) =>{
+        const user = {name,email,address, university} ;
+ 
+        fetch('http://localhost:5000/users',{
+         method: 'POST',
+         headers:{
+             'content-type': 'application/json'
+         },
+         body: JSON.stringify(user)
+        })
+ 
+        .then(res => res.json())
+        .then(data => {
+        setCreatedUserEmail(email);
+        })
+     };
     
     return (
         <div>
              <div>
                 <div>
-    <div className='flex justify-center items-center'>
-        <div className='p-7'>
-            <h2 className='text-5xl text-center mb-6 font-semibold text-blue-400'>Sign in</h2>
+    <div className=' justify-center items-center'>
+        <div >
+            <h2 className='text-5xl text-center  font-semibold text-blue-400 mt-5'>Sign up</h2>
 
-            <div className='justify-center justify-items-center grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-5'>
-            <div >
-<img   src="https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7965.jpg?w=2000" alt="" />
-            </div>
-            <div className="card w-96 pt-20">
+            <div>
+           
+            <div className="card flex mx-auto w-96 ">
   <div className="card-body">
     
   <div>
@@ -78,6 +92,20 @@ const Signup = () => {
                         required: true
                     })} className="input input-bordered w-full max-w-xs" />
                     {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
+                </div>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label"> <span className="label-text">Address</span></label>
+                    <input type="text" {...register("address", {
+                        required: true
+                    })} className="input input-bordered w-full max-w-xs" />
+                    {errors.email && <p className='text-red-500'>{errors.address.message}</p>}
+                </div>
+                <div className="form-control w-full max-w-xs">
+                    <label className="label"> <span className="label-text">University</span></label>
+                    <input type="text" {...register("university", {
+                        required: true
+                    })} className="input input-bordered w-full max-w-xs" />
+                    {errors.email && <p className='text-red-500'>{errors.university.message}</p>}
                 </div>
 
                 <div className="form-control w-full max-w-xs">

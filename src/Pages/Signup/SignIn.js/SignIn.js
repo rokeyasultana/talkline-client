@@ -46,16 +46,13 @@ const SignIn = () => {
     return (
         <div>
          <div>
-    <div className='flex justify-center items-center'>
-        <div className='p-7'>
-            <h2 className='text-5xl text-center mb-6 font-semibold text-blue-400'>Sign in</h2>
+    <div >
+        <div >
+            <h2 className='text-5xl text-center font-semibold text-blue-400 mt-5'>Sign in</h2>
 
-            <div className='justify-center justify-items-center grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-5'>
             <div >
-<img   src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg?w=2000" alt="" />
-            </div>
 
-            <div className="card w-96 pt-20">
+            <div className="card flex mx-auto w-96 pt-20">
   <div className="card-body">
     
   <div className=' '>
@@ -85,7 +82,7 @@ const SignIn = () => {
                     {loginError && <p className='text-red-600'>{loginError}</p>}
                 </div>
             </form>
-            <p>New to TechMate ? <Link className='text-blue-500' to="/signup">Create new Account</Link></p>
+            <p>New to Talkline ? <Link className='text-blue-500' to="/signup">Create new Account</Link></p>
             <div className="divider">OR</div>
             <button  onClick={handleGoogleSignIn} className='btn btn-outline w-full text-blue-500'>CONTINUE WITH GOOGLE</button>
         </div>

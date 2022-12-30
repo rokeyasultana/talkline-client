@@ -21,6 +21,7 @@ const Navbar = () => {
       <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-box w-52 ">
         <li><Link to='/'>Homepage</Link></li>
         <li><Link to='/media'>Media</Link></li>
+        <li><Link to='/message'>Message</Link></li>
         <li><Link to='/about'>About</Link></li>
         
         {user?.uid ?
